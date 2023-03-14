@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -p batch
+#SBATCH -t 120:00:00
+#SBATCH --job-name='FOM27_3'
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mail-user=sakbari@okstate.edu
+#SBATCH --mail-type=end
+
+module load anaconda3/2021.05
+cd /scratch/sakbari/FOM
+python ns2d_ws_rbc.py 3
+cd /scratch/sakbari/FOM/batchScripts

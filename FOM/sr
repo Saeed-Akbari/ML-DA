@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Assign the filename
+filenameMain="FOMbatch"
+echo "#!/bin/bash">runFile
+
+for var in $(seq 1 9; seq 11 19; seq 21 29); do
+    # copy the file
+    filename="batchScripts/$filenameMain$var"
+    cp ./$filenameMain ./$filename
+    
+    echo "sbatch $filename">>./runFile
+
+    # The search string
+    search1="#SBATCH --job-name='FOM'"
+    search2="python ns2d_ws_rbc.py"
+
+    # The replace string
+    replace1="#SBATCH --job-name='FOM27_$var'"
+    replace2="python ns2d_ws_rbc.py $var"
+
+    #if [[ $search1 != "" && $replace1 != "" ]]; then
+    sed -i "s/$search1/$replace1/" $filename
+    #fi
+
+    #if [[ $search2 != "" && $replace2 != "" ]]; then
+    sed -i "s/$search2/$replace2/" $filename
+    #fi
+done
+
+
+
+

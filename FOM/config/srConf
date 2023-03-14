@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Assign the filename
+filenameMain="1.yaml"
+for var in $(seq 2 9); do
+    filename="$var.yaml"
+    cp ./$filenameMain ./$filename
+    search1="1.0e6"
+    replace1="$var.0e6"
+    sed -i "s/$search1/$replace1/" $filename
+done
+
+for var in $(seq 11 19); do
+    newVar=$(($var-10))
+    filename="$var.yaml"
+    cp ./$filenameMain ./$filename
+    search1="1.0e6"
+    replace1="$newVar.0e7"
+    sed -i "s/$search1/$replace1/" $filename
+done
+
+for var in $(seq 21 29); do
+    newVar=$(($var-20))
+    filename="$var.yaml"
+    cp ./$filenameMain ./$filename
+    search1="1.0e6"
+    replace1="1.${newVar}e7"
+    sed -i "s/$search1/$replace1/" $filename
+done
+
+
+
